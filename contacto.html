@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contacto | Fabián Flores</title>
+
+    <meta name="description"
+        content="Información de contacto de Fabián Flores, estudiante de Diseño en la Pontificia Universidad Católica de Valparaíso.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+ 
+<body class="page-contact">
+
+    <!-- ==========================
+            NAVEGACIÓN
+    =========================== -->
+
+    <nav class="site-nav">
+
+        <div class="container nav-content">
+
+            <a href="index.html" class="nav-brand">
+                <span class="brand-name">Fabián</span>
+                <span class="brand-surname">Flores</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html" class="nav-link">
+                    Inicio
+                </a>
+
+                <a href="sobre-mi.html" class="nav-link">
+                    Sobre mí
+                </a>
+
+                <a href="proyectos.html" class="nav-link">
+                    Proyectos
+                </a>
+
+                <a href="contacto.html" class="nav-link active">
+                    Contacto
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- ==========================
+            CABECERA DE PÁGINA
+    =========================== -->
+
+<!-- ==========================
+        CABECERA DE CONTACTO
+=========================== -->
+
+    <header class="page-header contact-page-header">
+
+        <div class="container contact-header-grid">
+
+            <!-- Texto -->
+
+            <div class="contact-header-copy">
+
+                <p class="page-eyebrow">
+                    Contacto
+                </p>
+
+                <h1>
+                    Hablemos
+                </h1>
+
+                <p class="page-description">
+                    Si tienes una propuesta, proyecto o consulta,
+                    puedes escribirme directamente o enviarme un mensaje.
+                </p>
+
+            </div>
+
+            <!-- Correos -->
+
+            <div class="contact-options contact-options-header">
+
+
+                <!-- Institucional -->
+
+                <a
+                    href="mailto:fabian.flores.e@mail.pucv.cl"
+                    class="contact-option">
+
+                    <span class="contact-option-label">
+                        Institucional
+                    </span>
+
+                    <strong>
+                        fabian.flores.e@mail.pucv.cl
+                    </strong>
+
+                    <span class="contact-option-note">
+                        Pontificia Universidad Católica de Valparaíso
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- ==========================
+            INFORMACIÓN DE CONTACTO
+    =========================== -->
+
+    <main>
+
+        <!-- ==========================
+                FORMULARIO
+        =========================== -->
+
+        <section class="section contact-form-section">
+
+            <div class="container contact-form-grid">
+
+                <div class="contact-form-intro">
+
+                    <p class="page-eyebrow">
+                        Mensaje directo
+                    </p>
+
+                    <h2 class="section-title">
+                        Cuéntame qué<br>
+                        tienes en mente
+                    </h2>
+
+                    <p>
+                        Si quieres conversar sobre un proyecto,
+                        colaboración, trabajo o cualquier otra propuesta,
+                        puedes escribirme desde aquí.
+                    </p>
+
+                </div>
+
+                <form
+                    id="contact-form"
+                    class="contact-form"
+                    action="https://formspree.io/f/mnpawgqn"
+                    method="POST">
+
+                    <div class="form-row">
+
+                        <div class="form-field">
+
+                            <label for="contact-name">
+                                Nombre
+                            </label>
+
+                            <input
+                                type="text"
+                                id="contact-name"
+                                name="nombre"
+                                placeholder="Tu nombre"
+                                autocomplete="name"
+                                required>
+
+                        </div>
+
+                        <div class="form-field">
+
+                            <label for="contact-email">
+                                Correo
+                            </label>
+
+                            <input
+                                type="email"
+                                id="contact-email"
+                                name="email"
+                                placeholder="tu@correo.com"
+                                autocomplete="email"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-field">
+
+                        <label for="contact-subject">
+                            Asunto
+                        </label>
+
+                        <input
+                            type="text"
+                            id="contact-subject"
+                            name="asunto"
+                            placeholder="¿Sobre qué quieres conversar?"
+                            required>
+
+                    </div>
+
+                    <div class="form-field">
+
+                        <label for="contact-message">
+                            Mensaje
+                        </label>
+
+                        <textarea
+                            id="contact-message"
+                            name="mensaje"
+                            placeholder="Cuéntame sobre tu proyecto, propuesta, trabajo o consulta..."
+                            required></textarea>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn contact-submit">
+
+                        Enviar mensaje →
+
+                    </button>
+
+                    <p
+                        id="contact-form-status"
+                        class="form-status"
+                        aria-live="polite">
+                    </p>
+
+
+                </form>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ==========================
+            FOOTER
+    =========================== -->
+
+    <footer>
+
+        <div class="container footer-content">
+
+            <div class="footer-course">
+
+                <h3>
+                    <a href="https://wiki.ead.pucv.cl/Dise%C3%B1o_desde_el_C%C3%B3digo_2026"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        Diseño desde el Código 2026
+                    </a>
+                </h3>
+
+                <p>
+                    A cargo de
+                    <a href="https://wiki.ead.pucv.cl/Basilio_C%C3%A1ceres"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        Basilio Cáceres Luke
+                    </a>
+                </p>
+
+            </div>
+
+            <div>
+
+                <p id="copyright">
+                    © 2026 · Fabián Flores
+                </p>
+
+                <p>
+                    Pontificia Universidad Católica de Valparaíso
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
