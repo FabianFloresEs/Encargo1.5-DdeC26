@@ -1,21 +1,10 @@
 /* ==========================================
-   APARICIÓN AL CARGAR LA PÁGINA
+    PREVISUALIZACIÓN DE PROYECTOS
 ========================================== */
 
-window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
-});
+const projectModal = document.getElementById("project-modal");
 
-/* ==========================================
-   PREVISUALIZACIÓN DE PROYECTOS
-========================================== */
-
-const projectModal =
-    document.getElementById(
-        "project-modal"
-    );
-
-if (projectModal) {
+if (projectModal){
 
     const projectData = {
 
@@ -142,71 +131,22 @@ if (projectModal) {
 
     };
 
-    const modalImage =
-        document.getElementById(
-            "project-modal-image"
-        );
+    const modalImage = document.getElementById("project-modal-image");
+    const modalMedia = projectModal.querySelector(".project-modal-media");
+    const modalCategory = document.getElementById("project-modal-category");
+    const modalTitle = document.getElementById("project-modal-title");
+    const modalDescription = document.getElementById("project-modal-description");
+    const modalKeywords = document.getElementById("project-modal-keywords");
+    const modalWiki = document.getElementById("project-modal-wiki");
+    const closeButton = projectModal.querySelector(".project-modal-close");
 
-    const modalMedia =
-        projectModal.querySelector(
-            ".project-modal-media"
-        );
+    let lastProjectTrigger = null;
 
-    const modalCategory =
-        document.getElementById(
-            "project-modal-category"
-        );
-
-    const modalTitle =
-        document.getElementById(
-            "project-modal-title"
-        );
-
-    const modalDescription =
-        document.getElementById(
-            "project-modal-description"
-        );
-
-    const modalKeywords =
-        document.getElementById(
-            "project-modal-keywords"
-        );
-
-    const modalWiki =
-        document.getElementById(
-            "project-modal-wiki"
-        );
-
-    const closeButton =
-        projectModal.querySelector(
-            ".project-modal-close"
-        );
-
-    const zoomControl =
-        projectModal.querySelector(
-            ".project-modal-zoom-control"
-        );
-
-    const zoomRange =
-        projectModal.querySelector(
-            ".project-zoom-range"
-        );
-
-
-    const zoomInButton =
-        projectModal.querySelector(
-            ".project-zoom-in"
-        );
-
-    const zoomOutButton =
-        projectModal.querySelector(
-            ".project-zoom-out"
-        );
-
-    const zoomValue =
-        projectModal.querySelector(
-            ".project-zoom-value"
-        );
+    const zoomControl = projectModal.querySelector(".project-modal-zoom-control");
+    const zoomRange = projectModal.querySelector(".project-zoom-range");
+    const zoomInButton = projectModal.querySelector(".project-zoom-in");
+    const zoomOutButton = projectModal.querySelector(".project-zoom-out");
+    const zoomValue = projectModal.querySelector(".project-zoom-value");
 
     /* ======================================
     ZOOM DE IMAGEN
@@ -509,209 +449,200 @@ if (projectModal) {
        ABRIR PROYECTO
     ====================================== */
 
-    document
-        .querySelectorAll(
-            ".project-preview-trigger"
-        )
+    document .querySelectorAll(".project-preview-trigger")
         .forEach(trigger => {
+            trigger.addEventListener("click", () => {
+                const project = trigger.dataset.project;
+                const data = projectData[project];
 
-            trigger.addEventListener(
-                "click",
-                () => {
+                if (!data) {return;}
 
-                    const project =
-                        trigger.dataset.project;
+                lastProjectTrigger = trigger;
+                resetZoom();
 
+                const zoomEnabled = data.zoom !== false;
+                zoomControl.hidden = !zoomEnabled;
+                const previewImage = trigger .closest(".project-card") ?.querySelector(".project-image img");
 
-                    const data =
-                        projectData[project];
+                modalImage.src =
+                    previewImage
+                        ?.getAttribute("src")
+                    || data.image;
 
+                modalImage.alt =
+                    previewImage
+                        ?.getAttribute("alt")
+                    || data.alt;
 
-                    if (!data) {
-                        return;
-                    }
+                modalCategory.textContent = data.category;
+                modalTitle.textContent = data.title;
+                modalDescription.textContent = data.description;
+                modalWiki.href = data.wiki;
+                modalKeywords.innerHTML = "";
 
-                    resetZoom();
+                data.keywords.forEach(keyword => {
+                    const tag = document.createElement("li");
+                    tag.textContent = keyword;
+                    modalKeywords.appendChild(tag);
+                });
 
-                    const zoomEnabled =
-                        data.zoom !== false;
-
-
-                    zoomControl.hidden =
-                        !zoomEnabled;
-
-                    const previewImage =
-                        trigger
-                            .closest(".project-card")
-                            ?.querySelector(
-                                ".project-image img"
-                            );
-
-                    modalImage.src =
-                        previewImage
-                            ?.getAttribute("src")
-                        || data.image;
-
-
-                    modalImage.alt =
-                        previewImage
-                            ?.getAttribute("alt")
-                        || data.alt;
-
-
-                    modalCategory.textContent =
-                        data.category;
-
-
-                    modalTitle.textContent =
-                        data.title;
-
-
-                    modalDescription.textContent =
-                        data.description;
-
-
-                    modalWiki.href =
-                        data.wiki;
-
-
-                    modalKeywords.innerHTML =
-                        "";
-
-                    data.keywords.forEach(
-                        keyword => {
-
-                            const tag =
-                                document.createElement(
-                                    "span"
-                                );
-
-                            tag.textContent =
-                                keyword;
-
-                            modalKeywords.appendChild(
-                                tag
-                            );
-
-                        }
-                    );
-
-                    document.body.classList.add(
-                        "modal-open"
-                    );
-
-                    projectModal.showModal();
-
-                }
-            );
-
+                document.body.classList.add("modal-open");
+                projectModal.showModal();
+                closeButton.focus();
+            });
         });
-
 
     /* ======================================
        CERRAR
     ====================================== */
 
-    closeButton.addEventListener(
-        "click",
-        () => {
+    closeButton.addEventListener("click", () => {projectModal.close();});
 
-            projectModal.close();
+    projectModal.addEventListener("click", (event) => {
+        if (event.target === projectModal) {projectModal.close();}
+    });
 
-        }
+    projectModal.addEventListener("close", () => {
+        document.body.classList.remove("modal-open");
+        resetZoom();
+        modalImage.removeAttribute("src");
+        modalImage.alt = "";
+
+        if (lastProjectTrigger) {
+            lastProjectTrigger.focus();
+            lastProjectTrigger = null;
+        }}
     );
-
-    projectModal.addEventListener(
-        "click",
-        (event) => {
-
-            if (
-                event.target ===
-                projectModal
-            ) {
-
-                projectModal.close();
-
-            }
-
-        }
-    );
-
-    projectModal.addEventListener(
-        "close",
-        () => {
-
-            document.body.classList.remove(
-                "modal-open"
-            );
-
-            resetZoom();
-
-        }
-    );
-
-
 }
 
+/* == PREFERENCIA DE MOVIMIENTO == */
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
 /* ==========================================
-   ANIMACIÓN DE SECCIONES
+   APARICIÓN DE SECCIONES
 ========================================== */
 
 const sections = document.querySelectorAll(".section");
 
-const observer = new IntersectionObserver((entries) => {
+if (sections.length && !prefersReducedMotion.matches) {
 
-    entries.forEach(entry => {
+    const observer = new IntersectionObserver((entries, observerInstance) => {
+        entries.forEach(
+            entry => {
+                if (!entry.isIntersecting){return;}
+                entry.target.classList.add("show");
+                observerInstance.unobserve(entry.target);
+            }
+        );}, {threshold:0.12, rootMargin: "0px 0px -40px 0px"}
+    );
 
-        if (entry.isIntersecting) {
-
-            entry.target.classList.add("show");
-
+    sections.forEach(
+        section => {
+            section.classList.add("hidden");
+            observer.observe(section);
         }
+    );
 
-    });
-
-}, {
-
-    threshold: 0.15
-
-});
-
-sections.forEach(section => {
-
-    section.classList.add("hidden");
-
-    observer.observe(section);
-
-});
+}
 
 /* ==========================================
    SCROLL SUAVE PARA ENLACES INTERNOS
 ========================================== */
 
-const links = document.querySelectorAll('a[href^="#"]');
+const links = document.querySelectorAll('a[href^="#"]:not([href="#"])');
 
 links.forEach(link => {
-
-    link.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
+    link.addEventListener("click",function (event){
         const target = document.querySelector(this.getAttribute("href"));
-
-        if (target) {
-
-            target.scrollIntoView({
-
-                behavior: "smooth"
-
-            });
-
-        }
-
+        if (!target) {return;}
+        event.preventDefault();
+        target.scrollIntoView({ behavior:prefersReducedMotion.matches ? "auto" : "smooth"});
     });
-
 });
+
+/* ==========================================
+   FILTROS Y ORDEN DE EJERCICIOS
+========================================== */
+
+const exerciseList = document.getElementById("exercise-list");
+
+if (exerciseList){
+    const filterButtons = document.querySelectorAll(".exercise-filter");
+    const sortSelect = document.getElementById("exercise-sort");
+    const exerciseCards = Array.from(exerciseList.querySelectorAll(".exercise-card"));
+    let activeFilter = "all";
+
+    /* ======================================
+       COMPROBAR CATEGORÍA
+    ====================================== */
+
+    function matchesExerciseFilter(card,filter){
+        if (filter === "all") {return true;}
+        const categories = (card.dataset.category || "").split(/\s+/);
+        return categories.includes(filter);
+    }
+
+    /* ======================================
+       MOSTRAR / OCULTAR
+    ====================================== */
+
+    function filterExercises(){
+        exerciseCards.forEach(card => {
+            const shouldShow = matchesExerciseFilter(card, activeFilter);
+            card.hidden = !shouldShow;}
+        );
+    }
+
+    /* ======================================
+       ORDENAR
+    ====================================== */
+
+    function sortExercises(){
+        const order = sortSelect?.value || "newest";
+        const sortedCards = [...exerciseCards].sort(
+            (a, b) => {
+                const orderA = Number(a.dataset.order) || 0;
+                const orderB = Number(b.dataset.order) || 0;
+
+                 if (order === "oldest") {return (orderA - orderB);}
+                  return (orderB - orderA);
+            }
+        );
+        sortedCards.forEach(card => {exerciseList.appendChild(card);});
+    }
+
+    /* ======================================
+       ACTUALIZAR GALERÍA
+    ====================================== */
+
+    function updateExercises(){
+        filterExercises();
+        sortExercises();
+    }
+
+    /* ======================================
+       BOTONES DE FILTRO
+    ====================================== */
+
+    filterButtons.forEach(
+        button => {
+            button.addEventListener("click",() => {
+                activeFilter = button.dataset.filter;
+                filterButtons.forEach(item => {item.classList.remove("active");});
+                button.classList.add("active");
+                updateExercises();}
+            );
+        }
+    );
+
+    /* ======================================
+       SELECTOR DE ORDEN
+    ====================================== */
+
+    if (sortSelect) {sortSelect.addEventListener("change", updateExercises);}
+    updateExercises();
+
+}
 
 /* ==========================================
    AÑO AUTOMÁTICO EN EL FOOTER
@@ -719,7 +650,7 @@ links.forEach(link => {
 
 const copyright = document.getElementById("copyright");
 
-if (copyright) {
+if (copyright){
 
     copyright.innerHTML = `© ${new Date().getFullYear()} · Fabián Flores`;
 
@@ -734,7 +665,7 @@ const contactForm =
         "contact-form"
     );
 
-if (contactForm) {
+if (contactForm){
 
     const formStatus =
         document.getElementById(
@@ -860,21 +791,12 @@ if (contactForm) {
 ========================================== */
 
 const hero = document.querySelector(".hero");
-const heroFluid = document.querySelector(".hero-fluid");
 
-if (hero && heroFluid) {
-
-    let currentX = 0;
-    let currentY = 0;
-
-    let targetX = 0;
-    let targetY = 0;
-
-    let impactX = 0;
-    let impactY = 0;
-
+if (hero){
     let isHolding = false;
     let activePointerId = null;
+    let wordRevealTimer = null;
+    const WORD_REVEAL_TIME = 2600;
 
     let holdEffect = null;
 
@@ -894,174 +816,129 @@ if (hero && heroFluid) {
     const RIPPLE_COOLDOWN = 1000;
 
     /* ======================================
-       MOVIMIENTO DEL MOUSE
-    ====================================== */
-
-    hero.addEventListener("mousemove", (event) => {
-
-        const rect =
-            hero.getBoundingClientRect();
-
-        const mouseX =
-            (event.clientX - rect.left)
-            / rect.width;
-
-        const mouseY =
-            (event.clientY - rect.top)
-            / rect.height;
-
-        targetX =
-            (mouseX - 0.5) * 2;
-
-        targetY =
-            (mouseY - 0.5) * 2;
-
-    });
-
-    hero.addEventListener("mouseleave", () => {
-
-        if (!isHolding) {
-
-            targetX = 0;
-            targetY = 0;
-
-        }
-
-    });
-
-    /* ======================================
        DEFORMACIÓN DEL CONTENIDO
     ====================================== */
 
-    function distortHeroElement(
-        element,
-        clickX,
-        clickY,
-        heroRect
-    ){
+    function distortHeroElement(element, clickX, clickY, heroRect){
 
-        const elementRect =
-            element.getBoundingClientRect();
+        const elementRect = element.getBoundingClientRect();
 
-        const elementX =
-            elementRect.left
-            + elementRect.width / 2
-            - heroRect.left;
+        const elementX = elementRect.left + elementRect.width / 2 - heroRect.left;
+        const elementY = elementRect.top + elementRect.height / 2 - heroRect.top;
 
-        const elementY =
-            elementRect.top
-            + elementRect.height / 2
-            - heroRect.top;
+        const deltaX = elementX - clickX;
+        const deltaY = elementY - clickY;
 
-        const deltaX =
-            elementX - clickX;
+        const distance = Math.hypot(deltaX, deltaY);
 
-        const deltaY =
-            elementY - clickY;
+        const directionX = distance > 0 ? deltaX / distance : 0;
+        const directionY = distance > 0 ? deltaY / distance : 0;
 
-        const distance =
-            Math.hypot(
-                deltaX,
-                deltaY
-            );
+        const strength = Math.max(0.20, 1 - distance / 1100);
 
-        const directionX =
-            distance > 0
-                ? deltaX / distance
-                : 0;
+        const movement=14*strength;
+        const moveX=directionX*movement;
+        const moveY=directionY*movement;
+        const delay=Math.min(distance*1.7,1700);
 
-        const directionY =
-            distance > 0
-                ? deltaY / distance
-                : 0;
-
-        const strength =
-            Math.max(
-                0.20,
-                1 - distance / 1100
-            );
-
-        const movement =
-            14 * strength;
-
-        const moveX =
-            directionX * movement;
-
-        const moveY =
-            directionY * movement;
-
-        const delay =
-            Math.min(
-                distance * 1.7,
-                1700
-            );
-
-
-        element.animate(
-
-            [
-
-                {
-                    transform:
-                        "translate3d(0,0,0) scaleX(1) scaleY(1)",
-                    offset:0
-                },
-
-                {
-                    transform:
-                        `
-                        translate3d(
-                            ${moveX}px,
-                            ${moveY}px,
-                            0
-                        )
-                        scaleX(${1 + .012 * strength})
-                        scaleY(${1 - .008 * strength})
-                        skewX(${directionX * 1.2 * strength}deg)
-                        `,
-                    offset:.38
-                },
-
-                {
-                    transform:
-                        `
-                        translate3d(
-                            ${moveX * -.25}px,
-                            ${moveY * -.25}px,
-                            0
-                        )
-                        scaleX(${1 - .006 * strength})
-                        scaleY(${1 + .006 * strength})
-                        skewX(${directionX * -.6 * strength}deg)
-                        `,
-                    offset:.70
-                },
-
-                {
-                    transform:
-                        "translate3d(0,0,0) scaleX(1) scaleY(1)",
-                    offset:1
-                }
-
-            ],
-
+        element.animate([
+            {transform: "translate3d(0, 0, 0) scaleX(1) scaleY(1)", offset: 0},
             {
-
-                duration:1100,
-
-                delay:delay,
-
-                easing:
-                    "cubic-bezier(.22,.65,.25,1)"
-
-            }
-
-        );
-
+                transform: `translate3d(${moveX}px, ${moveY}px, 0) scaleX(${1 + .012 * strength}) scaleY(${1 - .008 * strength}) skewX(${directionX * 1.2 * strength}deg)`,
+                offset:.38
+            },
+            {
+                transform: `translate3d(${moveX * -.25}px, ${moveY * -.25}px, 0) scaleX(${1 - .006 * strength}) scaleY(${1 + .006 * strength}) skewX(${directionX * -.6 * strength}deg)`,
+                offset:.70
+            },
+            {transform: "translate3d(0, 0, 0) scaleX(1) scaleY(1)", offset: 1}
+        ],{
+            duration: 1100,
+            delay: delay,
+            easing: "cubic-bezier(.22, .65, .25, 1)"
+        });
     }
 
     /* ======================================
-    CREAR ONDA GRANDE
+    PALABRAS OCULTAS
+    ====================================== */
+
+    function revealHeroWords(x,y){
+        clearTimeout(wordRevealTimer);
+        hero.style.setProperty("--word-reveal-x",`${x}px`);
+        hero.style.setProperty("--word-reveal-y",`${y}px`);
+        hero.classList.add("is-word-reveal");
+    }
+
+    function hideHeroWordsLater(){
+        clearTimeout(wordRevealTimer);
+        wordRevealTimer=setTimeout(()=>hero.classList.remove("is-word-reveal"),WORD_REVEAL_TIME);
+    }
+
+    function deflectHeroWords(x,y,rect,force=1,radius=650){
+        hero.querySelectorAll(".hero-word-inner").forEach(word=>{
+            const interruptions=Number(word.dataset.interruptions||0);
+            if(interruptions>=5) return;
+
+            const wordRect=word.getBoundingClientRect();
+            const wordX=wordRect.left+wordRect.width/2-rect.left;
+            const wordY=wordRect.top+wordRect.height/2-rect.top;
+            const dx=wordX-x,dy=wordY-y;
+            const distance=Math.hypot(dx,dy);
+
+            if(distance>radius) return;
+
+            const strength=1-distance/radius;
+            if(strength<.12) return;
+
+            let directionY=distance ? dy/distance : (wordY<rect.height/2 ? -1 : 1);
+            if(Math.abs(directionY)<.2) directionY=(wordY<=y ? -1 : 1)*.2;
+
+            const current=Number(word.dataset.driftY||0);
+            const parentRect=word.parentElement.getBoundingClientRect();
+            const baseTop=parentRect.top-rect.top;
+            const minY=35-baseTop;
+            const maxY=rect.height-35-baseTop-wordRect.height;
+            const next=Math.max(minY,Math.min(maxY,current+directionY*120*strength*force));
+
+            if(Math.abs(next-current)<4) return;
+
+            word.dataset.driftY=next;
+            word.dataset.interruptions=interruptions+1;
+            word.style.setProperty("--word-drift-y",`${next}px`);
+        });
+    }
+
+    function resetHeroWordRoute(word,randomizePosition=false){
+        const inner=word.querySelector(".hero-word-inner");
+        if(!inner) return;
+
+        inner.dataset.interruptions="0";
+        inner.dataset.driftY="0";
+        inner.style.setProperty("--word-drift-y","0px");
+
+        if(randomizePosition){
+            const previous=Number.parseFloat(word.style.getPropertyValue("--y"))||50;
+            let next=previous;
+
+            for(let i=0;i<8 && Math.abs(next-previous)<12;i++){
+                next=7+Math.random()*86;
+            }
+
+            word.style.setProperty("--y",`${next.toFixed(1)}%`);
+        }
+    }
+
+    hero.querySelectorAll(".hero-word").forEach(word=>{
+        resetHeroWordRoute(word);
+
+        word.addEventListener("animationiteration",()=>{
+            resetHeroWordRoute(word,true);
+        });
+    });
+
+    /* ======================================
+        CREAR ONDA GRANDE
     ====================================== */
 
     function createHeroRipple(
@@ -1123,112 +1000,42 @@ if (hero && heroFluid) {
     }
 
     /* ======================================
-       REACCIÓN AL IMPACTO
+    REACCIÓN AL IMPACTO
     ====================================== */
 
-    function createImpact(
-        x,
-        y,
-        rect
-    ){
+    function createImpact(x,y,rect){
+        createHeroRipple(x,y);
+        revealHeroWords(x,y);
 
-        createHeroRipple(
-            x,
-            y
-        );
-
-        const reactiveElements = [
-
-            document.querySelector(
-                ".hero-image img"
-            ),
-
-            ...document.querySelectorAll(
-                ".hero-text > *"
-            )
-
-        ].filter(Boolean);
-
-        reactiveElements.forEach(element => {
-
-            distortHeroElement(
-                element,
-                x,
-                y,
-                rect
-            );
-
+        hero.querySelectorAll(".hero-text > *").forEach(element=>{
+            distortHeroElement(element,x,y,rect);
         });
 
-        const clickX =
-            (x / rect.width - 0.5) * 2;
-
-        const clickY =
-            (y / rect.height - 0.5) * 2;
-
-
-        impactX +=
-            clickX * -140;
-
-        impactY +=
-            clickY * -100;
-
+        deflectHeroWords(x,y,rect);
     }
 
     /* ======================================
     IMPACTO CON COOLDOWN
     ====================================== */
 
-    function tryCreateImpact(
-        x,
-        y,
-        rect
-    ){
+    function tryCreateImpact(x,y,rect){
+        if(rippleCooldown) return;
 
-        /*
-        Durante el cooldown
-        no crear nuevas ondas.
-        */
-
-        if (rippleCooldown) {
-            return;
-        }
-
-
-        createImpact(
-            x,
-            y,
-            rect
-        );
-
-
+        createImpact(x,y,rect);
         rippleCharges--;
 
+        if(rippleCharges<=0){
+            rippleCooldown=true;
 
-        /*
-        Al consumir las dos ondas,
-        comenzar cooldown.
-        */
-
-        if (rippleCharges <= 0) {
-
-            rippleCooldown = true;
-
-
-            setTimeout(() => {
-
-                rippleCharges = 2;
-
-                rippleCooldown = false;
-
-            }, RIPPLE_COOLDOWN);
-
+            setTimeout(()=>{
+                rippleCharges=2;
+                rippleCooldown=false;
+            },RIPPLE_COOLDOWN);
         }
-
     }
 
     /* ======================================
-    CREAR ESTELA
+        CREAR ESTELA
     ====================================== */
 
     function createHoldTrail(
@@ -1279,153 +1086,63 @@ if (hero && heroFluid) {
     }
 
     /* ======================================
-       PRESIONAR
+    PRESIONAR
     ====================================== */
 
-    hero.addEventListener(
-        "pointerdown",
-        (event) => {
+    hero.addEventListener("pointerdown",(event)=>{
+        if(prefersReducedMotion.matches) return;
+        if(event.button!==0) return;
 
-            if (event.button !== 0) {
-                return;
-            }
+        event.preventDefault();
 
+        const rect=hero.getBoundingClientRect();
+        const x=event.clientX-rect.left;
+        const y=event.clientY-rect.top;
 
-            if (
-                event.target.closest(
-                    `
-                    .hero-image img,
-                    .hero-subtitle,
-                    .hero-text h1,
-                    .hero-text h2,
-                    .hero-description,
-                    .hero-buttons a
-                    `
-                )
-            ) {
-                return;
-            }
+        tryCreateImpact(x,y,rect);
 
+        isHolding=true;
+        activePointerId=event.pointerId;
+        hero.classList.add("is-holding");
 
-            const rect =
-                hero.getBoundingClientRect();
+        lastHoldTrailX=x;
+        lastHoldTrailY=y;
 
-            const x =
-                event.clientX - rect.left;
+        holdEffect=document.createElement("div");
+        holdEffect.classList.add("hero-hold-effect");
+        holdEffect.style.left=`${x}px`;
+        holdEffect.style.top=`${y}px`;
 
-            const y =
-                event.clientY - rect.top;
-
-
-            /* Primera onda */
-
-            tryCreateImpact(
-                x,
-                y,
-                rect
-            );
-
-
-            isHolding = true;
-
-            activePointerId =
-                event.pointerId;
-
-            hero.classList.add(
-                "is-holding"
-            );
-
-
-            event.preventDefault();
-
-
-            lastHoldTrailX = x;
-            lastHoldTrailY = y;
-
-            /* Crear efecto que seguirá al puntero */
-
-            holdEffect =
-                document.createElement("div");
-
-            holdEffect.classList.add(
-                "hero-hold-effect"
-            );
-
-            holdEffect.style.left =
-                `${x}px`;
-
-            holdEffect.style.top =
-                `${y}px`;
-
-            hero.appendChild(
-                holdEffect
-            );
-
-
-            hero.setPointerCapture(
-                event.pointerId
-            );
-
-        }
-    );
+        hero.appendChild(holdEffect);
+        hero.setPointerCapture(event.pointerId);
+    });
 
     /* ======================================
        MANTENER PRESIONADO + MOVER
     ====================================== */
 
-    hero.addEventListener(
-        "pointermove",
-        (event) => {
+    hero.addEventListener("pointermove", (event) => {
 
-            if (
-                !isHolding ||
-                event.pointerId !== activePointerId ||
-                !holdEffect
-            ) {
-                return;
-            }
+        if (!isHolding || event.pointerId !== activePointerId || !holdEffect) {return;}
 
+        const rect = hero.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
 
-            const rect =
-                hero.getBoundingClientRect();
+        holdEffect.style.left = `${x}px`;
+        holdEffect.style.top = `${y}px`;
 
-            const x =
-                event.clientX - rect.left;
+        revealHeroWords(x,y);
 
-            const y =
-                event.clientY - rect.top;
+        const trailDistance = Math.hypot(x - lastHoldTrailX, y - lastHoldTrailY);
 
-
-            holdEffect.style.left =
-                `${x}px`;
-
-            holdEffect.style.top =
-                `${y}px`;
-
-            const trailDistance =
-                Math.hypot(
-                    x - lastHoldTrailX,
-                    y - lastHoldTrailY
-                );
-
-
-            if (
-                trailDistance >= HOLD_TRAIL_DISTANCE
-            ) {
-
-                createHoldTrail(
-                    x,
-                    y
-                );
-
-
-                lastHoldTrailX = x;
-                lastHoldTrailY = y;
-
-            }
-
+        if(trailDistance>=HOLD_TRAIL_DISTANCE){
+            createHoldTrail(x,y);
+            deflectHeroWords(x,y,rect,.35,240);
+            lastHoldTrailX=x;
+            lastHoldTrailY=y;
         }
-    );
+    });
 
     /* ======================================
        SOLTAR
@@ -1472,11 +1189,8 @@ if (hero && heroFluid) {
 
 
         isHolding = false;
-
-        hero.classList.remove(
-            "is-holding"
-        );
-
+        hero.classList.remove("is-holding");
+        hideHeroWordsLater();
 
         if (holdEffect) {
 
@@ -1515,69 +1229,39 @@ if (hero && heroFluid) {
 
     }
 
-    hero.addEventListener(
-        "pointerup",
-        stopHeroHold
-    );
-
-    hero.addEventListener(
-        "pointercancel",
-        stopHeroHold
-    );
+    hero.addEventListener("pointerup", stopHeroHold);
+    hero.addEventListener("pointercancel", stopHeroHold);
 
     /* ======================================
-       ANIMACIÓN CONTINUA
+    PAUSA DEL FONDO FUERA DE PANTALLA
     ====================================== */
 
-    function animateFluidMouse(){
+    let heroIsVisible = true;
 
-        currentX +=
-            (targetX - currentX) * 0.12;
+    /* ======================================
+    ACTUALIZAR ESTADO
+    ====================================== */
 
-        currentY +=
-            (targetY - currentY) * 0.12;
+    function updateHeroAnimationState(){hero.classList.toggle("is-paused", !heroIsVisible || document.hidden);}
 
+    /* ======================================
+    DETECTAR VISIBILIDAD DEL HERO
+    ====================================== */
 
-        impactX *= 0.94;
-        impactY *= 0.94;
+    const heroVisibilityObserver = new IntersectionObserver(
+        entries => { entries.forEach(
+            entry => {heroIsVisible = entry.isIntersecting; updateHeroAnimationState();}
+        );},
+        {threshold:0}
+    );
 
+    heroVisibilityObserver.observe(hero);
 
-        const movementX =
-            currentX * 130 + impactX;
+    /* ======================================
+    DETECTAR CAMBIO DE PESTAÑA
+    ====================================== */
 
-        const movementY =
-            currentY * 95 + impactY;
-
-
-        heroFluid.style.setProperty(
-            "--mouse-x",
-            `${movementX}px`
-        );
-
-        heroFluid.style.setProperty(
-            "--mouse-y",
-            `${movementY}px`
-        );
-
-
-        heroFluid.style.setProperty(
-            "--mouse-x-reverse",
-            `${movementX * -1.05}px`
-        );
-
-        heroFluid.style.setProperty(
-            "--mouse-y-reverse",
-            `${movementY * -1.05}px`
-        );
-
-
-        requestAnimationFrame(
-            animateFluidMouse
-        );
-
-    }
-
-    animateFluidMouse();
+    document.addEventListener("visibilitychange", updateHeroAnimationState);
 
 }
 
@@ -1633,4 +1317,120 @@ if (siteNav) {
 
     updateNavigation();
 
+}
+
+/* ==========================================
+   WIKI CASIOPEA — CAMPO ESTELAR
+========================================== */
+
+const wikiCard = document.getElementById("wiki");
+
+if (wikiCard) {
+    const wikiSpace = wikiCard.querySelector(".wiki-space");
+
+    /* ======================================
+       CREAR CAMPO DE ESTRELLAS
+    ====================================== */
+
+    function createWikiStars(){
+        if (!wikiSpace) {return;}
+
+        /*
+        Limpiar estrellas anteriores
+        para generar un cielo diferente
+        cada vez.
+        */
+
+        wikiSpace.innerHTML = "";
+
+        const starAmount = 105;
+
+
+        for (
+            let i = 0;
+            i < starAmount;
+            i++
+        ) {
+
+            const star =
+                document.createElement(
+                    "span"
+                );
+
+
+            star.classList.add(
+                "wiki-star"
+            );
+
+
+            /* ==================================
+               POSICIÓN ALEATORIA
+            ================================== */
+
+            star.style.left =
+                `${Math.random() * 100}%`;
+
+            star.style.top =
+                `${Math.random() * 100}%`;
+
+
+            /* ==================================
+               TAMAÑO
+            ================================== */
+
+            const randomSize = 1 + Math.random() * 2.3;
+            star.style.setProperty("--star-size", `${randomSize}px`);
+
+            /* ==================================
+               BRILLO
+            ================================== */
+
+            const brightness = .35 + Math.random() * .65;
+            star.style.setProperty("--star-opacity", brightness);
+
+            /*
+            Algunas estrellas se ven
+            ligeramente más luminosas.
+            */
+
+            if (Math.random() > .84) {
+                star.classList.add("is-bright");
+                star.style.setProperty("--star-glow",`${6 + Math.random() * 6}px`);
+            }
+
+            /* ==================================
+               VELOCIDAD DE PARPADEO
+            ================================== */
+
+            star.style.setProperty("--star-duration", `${1.8 + Math.random() * 4.2}s`);
+
+            /*
+            Delay negativo:
+            hace que cada estrella comience
+            en un punto diferente de su
+            animación.
+            */
+
+            star.style.animationDelay =`${-Math.random() * 5}s`;
+            wikiSpace.appendChild(star);
+
+        }
+    }
+
+    /* ======================================
+       ACTIVAR AL ENTRAR
+    ====================================== */
+
+    wikiCard.addEventListener("mouseenter", () => {createWikiStars();});
+
+    /* ======================================
+       LIMPIAR AL SALIR
+    ====================================== */
+
+    wikiCard.addEventListener("mouseleave",
+        () => {
+            setTimeout(() => {
+                if (!wikiCard.matches(":hover")){wikiSpace.innerHTML = "";}}, 450);
+        }
+    );
 }

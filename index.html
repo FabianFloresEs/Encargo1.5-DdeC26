@@ -27,20 +27,26 @@
             NAVEGACIÓN
     =========================== -->
 
-    <nav class="site-nav">
+    <nav
+        class="site-nav"
+        aria-label="Navegación principal">
 
         <div class="container nav-content">
 
-            <a href="index.html" class="nav-brand">
-                <span class="brand-name">Fabián</span>
-                <span class="brand-surname">Flores</span>
+            <a
+                href="index.html"
+                class="nav-brand"
+                aria-label="Fabián Flores — Inicio"
+                aria-current="page">
+                <span class="brand-name">
+                    Fabián
+                </span>
+                <span class="brand-surname">
+                    Flores
+                </span>
             </a>
 
             <div class="nav-links">
-
-                <a href="index.html" class="nav-link active">
-                    Inicio
-                </a>
 
                 <a href="sobre-mi.html" class="nav-link">
                     Sobre mí
@@ -48,6 +54,10 @@
 
                 <a href="proyectos.html" class="nav-link">
                     Proyectos
+                </a>
+
+                <a href="ejercicios.html" class="nav-link">
+                    Ejercicios
                 </a>
 
                 <a href="contacto.html" class="nav-link">
@@ -66,50 +76,59 @@
 
     <header class="hero">
 
-        <!-- Fondo fluido animado -->
         <div class="hero-fluid" aria-hidden="true">
-
             <div class="fluid-layer fluid-layer-1"></div>
-
             <div class="fluid-layer fluid-layer-2"></div>
-
             <div class="fluid-layer fluid-layer-3"></div>
+        </div>
 
+        <div class="hero-words" aria-hidden="true">
+            <div class="hero-word" style="--y:6%;--size:.82rem;--dur:23s;--delay:-8s;--op:.20"><span class="hero-word-inner">Diseño Gráfico</span></div>
+            <div class="hero-word" style="--y:11%;--size:1rem;--dur:27s;--delay:-19s;--op:.20"><span class="hero-word-inner">Interacción</span></div>
+            <div class="hero-word" style="--y:17%;--size:.75rem;--dur:20s;--delay:-4s;--op:.20"><span class="hero-word-inner">UX/UI</span></div>
+            <div class="hero-word" style="--y:22%;--size:.9rem;--dur:25s;--delay:-14s;--op:.20"><span class="hero-word-inner">Editorial</span></div>
+
+            <div class="hero-word" style="--y:29%;--size:.78rem;--dur:22s;--delay:-17s;--op:.20"><span class="hero-word-inner">Diseño de Servicios</span></div>
+            <div class="hero-word" style="--y:34%;--size:1.05rem;--dur:29s;--delay:-7s;--op:.20"><span class="hero-word-inner">Tipografía</span></div>
+            <div class="hero-word" style="--y:39%;--size:.8rem;--dur:21s;--delay:-11s;--op:.20"><span class="hero-word-inner">Diseño desde el Códgio</span></div>
+            <div class="hero-word" style="--y:44%;--size:.92rem;--dur:26s;--delay:-22s;--op:.20"><span class="hero-word-inner">Diseño Visual</span></div>
+
+            <div class="hero-word" style="--y:50%;--size:.72rem;--dur:19s;--delay:-3s;--op:.20"><span class="hero-word-inner">HTML · CSS · JS</span></div>
+            <div class="hero-word" style="--y:55%;--size:.98rem;--dur:28s;--delay:-16s;--op:.20"><span class="hero-word-inner">Experiencia</span></div>
+            <div class="hero-word" style="--y:60%;--size:.8rem;--dur:24s;--delay:-10s;--op:.20"><span class="hero-word-inner">Interfaces</span></div>
+            <div class="hero-word" style="--y:65%;--size:.88rem;--dur:30s;--delay:-25s;--op:.20"><span class="hero-word-inner">Desarrollo Web</span></div>
+
+            <div class="hero-word" style="--y:71%;--size:.76rem;--dur:21s;--delay:-9s;--op:.20"><span class="hero-word-inner">Proyectos</span></div>
+            <div class="hero-word" style="--y:76%;--size:1rem;--dur:27s;--delay:-20s;--op:.20"><span class="hero-word-inner">Investigación</span></div>
+            <div class="hero-word" style="--y:81%;--size:.8rem;--dur:23s;--delay:-5s;--op:.20"><span class="hero-word-inner">Observación</span></div>
+            <div class="hero-word" style="--y:86%;--size:.9rem;--dur:26s;--delay:-13s;--op:.20"><span class="hero-word-inner">Documentación</span></div>
+            <div class="hero-word" style="--y:91%;--size:.74rem;--dur:20s;--delay:-15s;--op:.20"><span class="hero-word-inner">Creación Digital</span></div>
+            <div class="hero-word" style="--y:95%;--size:.96rem;--dur:29s;--delay:-23s;--op:.20"><span class="hero-word-inner">Diseño</span></div>
         </div>
 
         <div class="hero-content">
-
-            <div class="hero-image">
-
-                <img src="assets/PerfilFabián.png" alt="Fotografía de Fabián Flores">
-
-            </div>
-
             <div class="hero-text">
 
-                <p class="hero-subtitle">
-                    Hola, soy
-                </p>
+                <p class="hero-subtitle">Hola, soy</p>
 
                 <h1>
-                    Fabián Flores
+                    <span class="hero-name-first">Fabián</span>
+                    <span class="hero-name-last">Flores</span>
                 </h1>
 
-                <h2>
-                    Estudiante de Diseño
-                </h2>
+                <div class="hero-role">
+                    <span class="hero-role-line" aria-hidden="true"></span>
+                    <h2>Estudiante de Diseño</h2>
+                    <span class="hero-role-line" aria-hidden="true"></span>
+                </div>
 
                 <p class="hero-description">
-
-                    Pontificia Universidad Católica de Valparaíso.
-
-                    Interesado en Diseño de Interacción, UX/UI,
+                    De la Pontificia Universidad Católica de Valparaíso.
+                    Interesado en Diseño Gráfico y de Interacción, editorial, de servicios, UX/UI,
                     desarrollo web y herramientas digitales para el diseño.
-
                 </p>
 
             </div>
-
         </div>
 
     </header>
@@ -133,7 +152,7 @@
                 </h2>
 
                 <p>
-                    Accede a mi formación, proyectos, contacto y
+                    Accede a mi formación, proyectos, ejercicios, contacto y
                     documentación académica.
                 </p>
 
@@ -211,38 +230,87 @@
 
             </div>
 
-            <!-- Wiki -->
+            <!-- Recursos académicos -->
 
-            <div id="wiki"
-                class="card wiki-card home-wiki-card">
+            <div class="home-resource-grid">
 
-                <div class="home-wiki-content">
+                <!-- Wiki Casiopea -->
 
-                    <p class="home-card-label">
-                        Archivo académico
-                    </p>
+                <div
+                    id="wiki"
+                    class="card home-resource-card">
 
-                    <h2>
-                        Mi Wiki Casiopea
-                    </h2>
+                    <!-- Fondo inspirado en Casiopea -->
+                    <div
+                        class="wiki-space"
+                        aria-hidden="true">
+                    </div>
 
-                    <p>
-                        En mi perfil de la Wiki Casiopea puedes encontrar
-                        documentación de proyectos, procesos de diseño,
-                        observaciones y trabajos desarrollados durante mi
-                        formación en la Escuela de Arquitectura y Diseño PUCV.
-                    </p>
+                    <div class="home-resource-content">
+
+                        <p class="home-card-label">
+                            Archivo académico
+                        </p>
+
+                        <h2>
+                            Mi Wiki Casiopea
+                        </h2>
+
+                        <p>
+                            En mi perfil de la Wiki Casiopea puedes encontrar
+                            documentación de proyectos, procesos de diseño,
+                            observaciones y trabajos desarrollados durante mi
+                            formación en la Escuela de Arquitectura y Diseño PUCV.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="https://wiki.ead.pucv.cl/Fabi%C3%A1n_Flores"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn">
+
+                        Visitar mi Wiki ↗
+
+                    </a>
 
                 </div>
 
-                <a href="https://wiki.ead.pucv.cl/Fabi%C3%A1n_Flores"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn">
+                <!-- Ejercicios -->
 
-                    Visitar mi Wiki ↗
+                <div
+                    id="ejercicios-home"
+                    class="card home-resource-card">
 
-                </a>
+                    <div class="home-resource-content">
+
+                        <p class="home-card-label">
+                            Diseño desde el Código
+                        </p>
+
+                        <h2>
+                            Ejercicios de clase
+                        </h2>
+
+                        <p>
+                            Revisa los ejercicios desarrollados durante
+                            las distintas clases de Diseño desde el Código,
+                            explorando HTML, CSS, JavaScript y construcción
+                            de interfaces web.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="ejercicios.html"
+                        class="btn">
+
+                        Ver ejercicios →
+
+                    </a>
+
+                </div>
 
             </div>
 

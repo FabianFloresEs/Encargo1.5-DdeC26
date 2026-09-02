@@ -27,13 +27,25 @@
             NAVEGACIÓN
     =========================== -->
 
-    <nav class="site-nav">
+    <nav
+        class="site-nav"
+        aria-label="Navegación principal">
 
         <div class="container nav-content">
 
-            <a href="index.html" class="nav-brand">
-                <span class="brand-name">Fabián</span>
-                <span class="brand-surname">Flores</span>
+            <a
+                href="index.html"
+                class="nav-brand"
+                aria-label="Fabián Flores — Ir al inicio">
+
+                <span class="brand-name">
+                    Fabián
+                </span>
+
+                <span class="brand-surname">
+                    Flores
+                </span>
+
             </a>
 
             <div class="nav-links">
@@ -42,12 +54,19 @@
                     Inicio
                 </a>
 
-                <a href="sobre-mi.html" class="nav-link active">
+                <a
+                    href="sobre-mi.html"
+                    class="nav-link active"
+                    aria-current="page">
                     Sobre mí
                 </a>
 
                 <a href="proyectos.html" class="nav-link">
                     Proyectos
+                </a>
+
+                <a href="ejercicios.html" class="nav-link">
+                    Ejercicios
                 </a>
 
                 <a href="contacto.html" class="nav-link">
@@ -64,30 +83,37 @@
             CABECERA DE PÁGINA
     =========================== -->
 
-    <header class="page-header">
+    <header class="page-header about-page-header">
 
-        <div class="container">
-
-            <p class="page-eyebrow">
-                Perfil
-            </p>
-
-            <h1>
-                Sobre mí
-            </h1>
-
-            <p class="page-description">
-
-                Soy estudiante de Diseño en la Pontificia Universidad Católica de Valparaíso,
-                con especial interés en el diseño gráfico y en interacción, en experiencia de usuario
-                y tecnologías aplicadas al diseño. Me gusta aprender constantemente nuevas herramientas,
-                experimentar con distintos medios y desarrollar proyectos que combinen creatividad,
-                investigación y programación.
-
-            </p>
-
+        <div class="hero-fluid page-fluid" aria-hidden="true">
+            <div class="fluid-layer fluid-layer-1"></div>
+            <div class="fluid-layer fluid-layer-2"></div>
+            <div class="fluid-layer fluid-layer-3"></div>
         </div>
 
+        <div class="container about-header-grid">
+            
+            <div class="about-header-copy">
+                <p class="page-eyebrow">Perfil</p>
+
+                <h1>Sobre mí</h1>
+
+                <p class="page-description">
+                    Soy estudiante de Diseño en la Pontificia Universidad Católica de Valparaíso,
+                    con especial interés en el diseño gráfico y en interacción, en experiencia de usuario
+                    y tecnologías aplicadas al diseño. Me gusta aprender constantemente nuevas herramientas,
+                    experimentar con distintos medios y desarrollar proyectos que combinen creatividad,
+                    investigación y programación.
+                </p>
+            </div>
+
+            <div class="about-header-image">
+                <img src="assets/PerfilFabián.png"
+                    alt="Fotografía de Fabián Flores"
+                    fetchpriority="high"
+                    decoding="async">
+            </div>
+        </div>
     </header>
 
     <!-- ==========================
@@ -280,20 +306,18 @@
                             Intereses y Herramientas
                         </h2>
 
-                        <div class="skills">
+                        <ul
+                            class="skills"
+                            aria-label="Intereses y herramientas">
 
-                            <span>Diseño de Interacción</span>
-                            <span>HTML, CSS, JavaScript</span>
-                            <span>Figma</span>
-
-                            <span>Diseño Gráfico</span>
-                            <span>Illustrator, Photoshop, InDesign</span>
-                            <span>Blender</span>
-
-                        </div>
-
+                            <li>Diseño de Interacción</li>
+                            <li>HTML, CSS, JavaScript</li>
+                            <li>Figma</li>
+                            <li>Diseño Gráfico</li>
+                            <li>Illustrator, Photoshop, InDesign</li>
+                            <li>Blender</li>
+                        </ul>
                     </div>
-
                 </div>
             </div>
 

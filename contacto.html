@@ -27,13 +27,25 @@
             NAVEGACIÓN
     =========================== -->
 
-    <nav class="site-nav">
+    <nav
+        class="site-nav"
+        aria-label="Navegación principal">
 
         <div class="container nav-content">
 
-            <a href="index.html" class="nav-brand">
-                <span class="brand-name">Fabián</span>
-                <span class="brand-surname">Flores</span>
+            <a
+                href="index.html"
+                class="nav-brand"
+                aria-label="Fabián Flores — Ir al inicio">
+
+                <span class="brand-name">
+                    Fabián
+                </span>
+
+                <span class="brand-surname">
+                    Flores
+                </span>
+
             </a>
 
             <div class="nav-links">
@@ -50,7 +62,14 @@
                     Proyectos
                 </a>
 
-                <a href="contacto.html" class="nav-link active">
+                <a href="ejercicios.html" class="nav-link">
+                    Ejercicios
+                </a>
+
+                <a
+                    href="contacto.html"
+                    class="nav-link active"
+                    aria-current="page">
                     Contacto
                 </a>
 
@@ -61,66 +80,68 @@
     </nav>
 
     <!-- ==========================
-            CABECERA DE PÁGINA
+            CABECERA DE CONTACTO
     =========================== -->
 
-<!-- ==========================
-        CABECERA DE CONTACTO
-=========================== -->
+        <header class="page-header contact-page-header">
 
-    <header class="page-header contact-page-header">
+            <div class="hero-fluid page-fluid" aria-hidden="true">
+                <div class="fluid-layer fluid-layer-1"></div>
+                <div class="fluid-layer fluid-layer-2"></div>
+                <div class="fluid-layer fluid-layer-3"></div>
+            </div>
 
-        <div class="container contact-header-grid">
+            <div class="container contact-header-grid">
 
-            <!-- Texto -->
+                <!-- Texto -->
 
-            <div class="contact-header-copy">
+                <div class="contact-header-copy">
 
-                <p class="page-eyebrow">
-                    Contacto
-                </p>
+                    <p class="page-eyebrow">
+                        Contacto
+                    </p>
 
-                <h1>
-                    Hablemos
-                </h1>
+                    <h1>
+                        Hablemos
+                    </h1>
 
-                <p class="page-description">
-                    Si tienes una propuesta, proyecto o consulta,
-                    puedes escribirme directamente o enviarme un mensaje.
-                </p>
+                    <p class="page-description">
+                        Si tienes una propuesta, proyecto o consulta,
+                        puedes escribirme directamente o enviarme un mensaje.
+                    </p>
+
+                </div>
+
+                <!-- Correos -->
+
+                <div class="contact-options contact-options-header">
+
+
+                    <!-- Institucional -->
+
+                    <a
+                        href="mailto:fabian.flores.e@mail.pucv.cl"
+                        class="contact-option">
+
+                        <span class="contact-option-label">
+                            Institucional
+                        </span>
+
+                        <strong>
+                            fabian.flores.e@mail.pucv.cl
+                        </strong>
+
+                        <span class="contact-option-note">
+                            Pontificia Universidad Católica de Valparaíso
+                        </span>
+
+                    </a>
+
+                </div>
 
             </div>
 
-            <!-- Correos -->
-
-            <div class="contact-options contact-options-header">
-
-
-                <!-- Institucional -->
-
-                <a
-                    href="mailto:fabian.flores.e@mail.pucv.cl"
-                    class="contact-option">
-
-                    <span class="contact-option-label">
-                        Institucional
-                    </span>
-
-                    <strong>
-                        fabian.flores.e@mail.pucv.cl
-                    </strong>
-
-                    <span class="contact-option-note">
-                        Pontificia Universidad Católica de Valparaíso
-                    </span>
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </header>
+        </header>
 
     <!-- ==========================
             INFORMACIÓN DE CONTACTO
@@ -299,5 +320,4 @@
     <script src="script.js"></script>
 
 </body>
-
 </html>

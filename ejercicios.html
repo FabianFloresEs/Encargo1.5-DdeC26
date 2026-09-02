@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Ejercicios | Fabián Flores
+    </title>
+
+    <meta
+        name="description"
+        content="Ejercicios desarrollados por Fabián Flores en la asignatura Diseño desde el Código 2026.">
+
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+</head>
+
+
+<body class="page-exercises">
+
+    <!-- ==========================
+            NAVEGACIÓN
+    =========================== -->
+
+    <nav
+        class="site-nav"
+        aria-label="Navegación principal">
+
+        <div class="container nav-content">
+
+            <a
+                href="index.html"
+                class="nav-brand"
+                aria-label="Fabián Flores — Ir al inicio">
+
+                <span class="brand-name">
+                    Fabián
+                </span>
+
+                <span class="brand-surname">
+                    Flores
+                </span>
+
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html" class="nav-link">
+                    Inicio
+                </a>
+
+                <a href="sobre-mi.html" class="nav-link">
+                    Sobre mí
+                </a>
+
+                <a href="proyectos.html" class="nav-link">
+                    Proyectos
+                </a>
+
+                <a
+                    href="ejercicios.html"
+                    class="nav-link active"
+                    aria-current="page">
+                    Ejercicios
+                </a>
+
+                <a href="contacto.html" class="nav-link">
+                    Contacto
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- ==========================
+            CABECERA
+    =========================== -->
+
+    <header class="page-header">
+
+        <div class="hero-fluid page-fluid" aria-hidden="true">
+            <div class="fluid-layer fluid-layer-1"></div>
+            <div class="fluid-layer fluid-layer-2"></div>
+            <div class="fluid-layer fluid-layer-3"></div>
+        </div>
+
+        <div class="container">
+
+
+            <p class="page-eyebrow">
+                Diseño desde el Código
+            </p>
+
+
+            <h1>
+                Ejercicios
+            </h1>
+
+
+            <p class="page-description">
+
+                Registro de ejercicios desarrollados durante
+                las clases de Diseño desde el Código,
+                explorando HTML, CSS, JavaScript y distintas
+                herramientas para la construcción de interfaces web.
+
+            </p>
+
+
+        </div>
+
+    </header>
+
+    <!-- ==========================
+            CONTENIDO
+    =========================== -->
+
+    <main>
+
+        <!-- ==========================
+                EJERCICIOS
+        =========================== -->
+
+        <section
+            id="ejercicios"
+            class="section exercises-section">
+
+            <div class="container">
+
+                <!-- Encabezado -->
+
+                <div class="exercises-heading">
+
+
+                    <p class="page-eyebrow">
+                        Archivo de clases
+                    </p>
+
+
+                    <h2 class="section-title">
+                        Ejercicios realizados
+                    </h2>
+
+
+                    <p>
+
+                        Una colección de ejercicios desarrollados
+                        durante el curso, organizados según
+                        contenido y orden de realización.
+
+                    </p>
+
+
+                </div>
+
+                <!-- ==========================
+                        FILTROS
+                =========================== -->
+
+                <div class="exercise-controls">
+
+
+                    <!-- Categorías -->
+
+                    <nav
+                        class="exercise-filters"
+                        aria-label="Filtrar ejercicios">
+
+
+                        <button
+                            type="button"
+                            class="exercise-filter active"
+                            data-filter="all">
+
+                            Todos
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="exercise-filter"
+                            data-filter="html">
+
+                            HTML
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="exercise-filter"
+                            data-filter="css">
+
+                            CSS
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="exercise-filter"
+                            data-filter="javascript">
+
+                            JavaScript
+
+                        </button>
+
+
+                    </nav>
+
+
+                    <!-- Orden -->
+
+                    <div class="exercise-sort">
+
+
+                        <label for="exercise-sort">
+                            Ordenar por
+                        </label>
+
+
+                        <select
+                            id="exercise-sort"
+                            name="exercise-sort">
+
+
+                            <option value="newest">
+                                Más recientes
+                            </option>
+
+
+                            <option value="oldest">
+                                Más antiguos
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                </div>
+
+                <!-- ==========================
+                        GALERÍA
+                =========================== -->
+
+                <div
+                    class="exercise-grid"
+                    id="exercise-list">
+
+                    <!-- ==========================
+                            ESTADO INICIAL
+                    =========================== -->
+
+                    <!-- EJERCICIO 2 -->
+                    <article
+                        class="exercise-card"
+                        data-category="html css"
+                        data-class="2"
+                        data-order="2">
+
+                        <a
+                            href="https://fabianfloreses.github.io/Ejercicio2-DdeC26/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="exercise-preview">
+
+                            <img
+                                src="assets/Ejercicio2-DdeC.png"
+                                alt="Previsualización del Ejercicio 2 de Diseño desde el Código"
+                                loading="lazy"
+                                decoding="async">
+
+                        </a>
+
+                        <div class="exercise-info">
+                            <div class="exercise-meta">
+
+                                <span>
+                                    Ejercicio 2
+                                </span>
+
+                                <span>
+                                    21.08.26
+                                </span>
+
+                            </div>
+
+                            <h3>
+                                Recreación UdeC
+                            </h3>
+
+                            <p>
+                                Ejercicio desarrollado durante la clase,
+                                con el propósito de practicar estilos y diagramación básica;
+                                 asignando clases, agrupando elementos en contenedores y con un primer acercamiento a displays flex y grid.
+                            </p>
+
+                            <a
+                                href="https://fabianfloreses.github.io/Ejercicio2-DdeC26/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="exercise-link">
+
+                                Ver ejercicio ↗
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                    <!-- ==================================================
+
+                         PLANTILLA PARA AGREGAR UN EJERCICIO
+
+                         Esta estructura está comentada.
+                         Más adelante la duplicaremos por cada
+                         ejercicio que quieras incorporar.
+
+                    ===================================================
+
+                    <article
+                        class="exercise-card"
+                        data-category="html"
+                        data-class="2"
+                        data-order="1">
+
+                        <a
+                            href="URL_PUBLICA_DEL_EJERCICIO"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="exercise-preview">
+
+                            <img
+                                src="assets/IMAGEN-DEL-EJERCICIO.jpg"
+                                alt="Previsualización del ejercicio"
+                                loading="lazy"
+                                decoding="async">
+
+                        </a>
+
+                        <div class="exercise-info">
+
+                            <div class="exercise-meta">
+
+                                <span>
+                                    HTML
+                                </span>
+
+                                <span>
+                                    Clase 2
+                                </span>
+
+
+                            </div>
+
+                            <h3>
+                                Nombre del ejercicio
+                            </h3>
+
+                            <p>
+
+                                Breve descripción del ejercicio
+                                realizado durante la clase.
+
+                            </p>
+
+                            <a
+                                href="URL_PUBLICA_DEL_EJERCICIO"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="exercise-link">
+
+                                Ver ejercicio ↗
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                    ================================================== -->
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==========================
+            FOOTER
+    =========================== -->
+
+    <footer>
+
+
+        <div class="container footer-content">
+
+
+            <div class="footer-course">
+
+
+                <h3>
+
+                    <a
+                        href="https://wiki.ead.pucv.cl/Dise%C3%B1o_desde_el_C%C3%B3digo_2026"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        Diseño desde el Código 2026
+
+                    </a>
+
+                </h3>
+
+
+                <p>
+
+                    A cargo de
+
+                    <a
+                        href="https://wiki.ead.pucv.cl/Basilio_C%C3%A1ceres"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        Basilio Cáceres Luke
+
+                    </a>
+
+                </p>
+
+
+            </div>
+
+
+            <div>
+
+
+                <p id="copyright">
+                    © 2026 · Fabián Flores
+                </p>
+
+
+                <p>
+                    Pontificia Universidad Católica de Valparaíso
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
